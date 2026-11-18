@@ -1,0 +1,20 @@
+{
+ "guncelleme": "2026-11-18",
+ "hipodromlar": [
+  {
+   "id": "elazig",
+   "ad": "Elazığ",
+   "tarih": "2026-11-18",
+   "sayfalar": [
+    {
+     "ad": "9 Geçiş",
+     "dosya": "data/elazig/20261118_9gecis.html"
+    },
+    {
+     "ad": "Yarış Zekası V2",
+     "dosya": "data/elazig/20261118_yaris_zekasi.html"
+    }
+   ]
+  }
+ ]
+}

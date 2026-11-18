@@ -1,0 +1,26 @@
+<!DOCTYPE html><html lang="tr"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Yarış Zekası</title><link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#0b1020"><meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes"><link rel="apple-touch-icon" href="icons/icon-192.png">
+<style>:root{--bg:#0b1020;--panel:#121a2f;--text:#edf2ff;--muted:#9fb0d0;--accent:#f6c453}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,Segoe UI,Arial,sans-serif;
+padding:max(18px,env(safe-area-inset-top)) 16px max(18px,env(safe-area-inset-bottom))}
+h1{margin:0 0 4px;font-size:26px}.sub{color:var(--muted);margin:0 0 20px;font-size:14px}
+.hip{background:var(--panel);border:1px solid #263759;border-radius:18px;padding:16px;margin-bottom:16px}
+.hip h2{margin:0 0 4px;color:var(--accent);font-size:20px}.hip small{color:var(--muted)}
+.hip a{display:block;margin-top:10px;padding:14px;border-radius:12px;background:#1a2542;color:var(--text);text-decoration:none;font-weight:600}
+.hip a:active{background:#263759}#st{color:var(--muted);font-size:13px;margin-top:8px}</style></head><body>
+<h1>Yarış Zekası</h1><p class="sub" id="gun"></p><div id="liste"></div><div id="st"></div>
+<script>
+const L=document.getElementById("liste"),S=document.getElementById("st"),G=document.getElementById("gun");
+function tr(t){const [y,m,d]=t.split("-");return d+"/"+m+"/"+y}
+fetch("data/index.json?t="+Date.now()).then(r=>r.json()).then(j=>{
+ G.textContent="Son güncelleme: "+tr(j.guncelleme);
+ L.innerHTML="";
+ j.hipodromlar.forEach(h=>{const d=document.createElement("div");d.className="hip";
+  d.innerHTML="<h2></h2><small></small>";d.querySelector("h2").textContent=h.ad;d.querySelector("small").textContent=tr(h.tarih)+" programı";
+  h.sayfalar.forEach(s=>{const a=document.createElement("a");a.href=s.dosya;a.textContent=s.ad;d.appendChild(a)});L.appendChild(d)});
+}).catch(()=>{S.textContent="Veri alınamadı. İnternet yoksa daha önce açtığınız sayfalar çevrimdışı görünür."});
+if("serviceWorker" in navigator)navigator.serviceWorker.register("sw.js");
+</script></body></html>
